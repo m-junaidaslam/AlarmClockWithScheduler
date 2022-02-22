@@ -1,0 +1,18 @@
+#include <ses_adc.h>
+#include <ses_lcd.h>
+#include <ses_led.h>
+#include <ses_pwm.h>
+#include <ses_uart.h>
+#include <ses_uart.h>
+#include <ses_timer.h>
+#include <ses_button.h>
+#include <ses_common.h>
+#include <ses_scheduler.h>
+
+int main(void) {
+
+	while (1) {
+
+	}
+	return 0;
+}

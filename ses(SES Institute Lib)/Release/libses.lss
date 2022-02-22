@@ -1,0 +1,876 @@
+In archive libses.a:
+
+ses_adc.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .text.adc_read.part.0 00000038  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  4 .text.adc_init 0000004c  00000000  00000000  0000006c  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  5 .text.adc_read 0000000e  00000000  00000000  000000b8  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  6 .text.adc_getJoystickDirection 00000042  00000000  00000000  000000c6  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .text.adc_getTemperature 0000000c  00000000  00000000  00000108  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  8 .comment      00000031  00000000  00000000  00000114  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text.adc_read.part.0:
+
+00000000 <adc_read.part.0>:
+   0:	90 91 7c 00 	lds	r25, 0x007C	; 0x80007c <__SREG__+0x80003d>
+   4:	90 7e       	andi	r25, 0xE0	; 224
+   6:	90 93 7c 00 	sts	0x007C, r25	; 0x80007c <__SREG__+0x80003d>
+   a:	90 91 7c 00 	lds	r25, 0x007C	; 0x80007c <__SREG__+0x80003d>
+   e:	89 2b       	or	r24, r25
+  10:	80 93 7c 00 	sts	0x007C, r24	; 0x80007c <__SREG__+0x80003d>
+  14:	80 91 7a 00 	lds	r24, 0x007A	; 0x80007a <__SREG__+0x80003b>
+  18:	80 64       	ori	r24, 0x40	; 64
+  1a:	80 93 7a 00 	sts	0x007A, r24	; 0x80007a <__SREG__+0x80003b>
+  1e:	80 91 7a 00 	lds	r24, 0x007A	; 0x80007a <__SREG__+0x80003b>
+  22:	86 ff       	sbrs	r24, 6
+  24:	00 c0       	rjmp	.+0      	; 0x26 <adc_read.part.0+0x26>
+  26:	00 00       	nop
+  28:	00 c0       	rjmp	.+0      	; 0x2a <adc_read.part.0+0x2a>
+  2a:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <__SREG__+0x800039>
+  2e:	20 91 79 00 	lds	r18, 0x0079	; 0x800079 <__SREG__+0x80003a>
+  32:	90 e0       	ldi	r25, 0x00	; 0
+  34:	92 2b       	or	r25, r18
+  36:	08 95       	ret
+
+Disassembly of section .text.adc_init:
+
+00000000 <adc_init>:
+   0:	80 98       	cbi	0x10, 0	; 16
+   2:	81 98       	cbi	0x10, 1	; 16
+   4:	82 98       	cbi	0x10, 2	; 16
+   6:	84 98       	cbi	0x10, 4	; 16
+   8:	85 98       	cbi	0x10, 5	; 16
+   a:	88 98       	cbi	0x11, 0	; 17
+   c:	89 98       	cbi	0x11, 1	; 17
+   e:	8a 98       	cbi	0x11, 2	; 17
+  10:	8c 98       	cbi	0x11, 4	; 17
+  12:	8d 98       	cbi	0x11, 5	; 17
+  14:	e4 e6       	ldi	r30, 0x64	; 100
+  16:	f0 e0       	ldi	r31, 0x00	; 0
+  18:	80 81       	ld	r24, Z
+  1a:	8e 7f       	andi	r24, 0xFE	; 254
+  1c:	80 83       	st	Z, r24
+  1e:	ec e7       	ldi	r30, 0x7C	; 124
+  20:	f0 e0       	ldi	r31, 0x00	; 0
+  22:	80 81       	ld	r24, Z
+  24:	80 64       	ori	r24, 0x40	; 64
+  26:	80 83       	st	Z, r24
+  28:	80 81       	ld	r24, Z
+  2a:	80 68       	ori	r24, 0x80	; 128
+  2c:	80 83       	st	Z, r24
+  2e:	80 81       	ld	r24, Z
+  30:	8f 7d       	andi	r24, 0xDF	; 223
+  32:	80 83       	st	Z, r24
+  34:	ea e7       	ldi	r30, 0x7A	; 122
+  36:	f0 e0       	ldi	r31, 0x00	; 0
+  38:	80 81       	ld	r24, Z
+  3a:	83 60       	ori	r24, 0x03	; 3
+  3c:	80 83       	st	Z, r24
+  3e:	80 81       	ld	r24, Z
+  40:	8f 7d       	andi	r24, 0xDF	; 223
+  42:	80 83       	st	Z, r24
+  44:	80 81       	ld	r24, Z
+  46:	80 68       	ori	r24, 0x80	; 128
+  48:	80 83       	st	Z, r24
+  4a:	08 95       	ret
+
+Disassembly of section .text.adc_read:
+
+00000000 <adc_read>:
+   0:	88 30       	cpi	r24, 0x08	; 8
+   2:	00 f4       	brcc	.+0      	; 0x4 <adc_read+0x4>
+   4:	0c 94 00 00 	jmp	0	; 0x0 <adc_read>
+   8:	8f ef       	ldi	r24, 0xFF	; 255
+   a:	9f ef       	ldi	r25, 0xFF	; 255
+   c:	08 95       	ret
+
+Disassembly of section .text.adc_getJoystickDirection:
+
+00000000 <adc_getJoystickDirection>:
+   0:	85 e0       	ldi	r24, 0x05	; 5
+   2:	0e 94 00 00 	call	0	; 0x0 <adc_getJoystickDirection>
+   6:	9c 01       	movw	r18, r24
+   8:	2b 5a       	subi	r18, 0xAB	; 171
+   a:	31 09       	sbc	r19, r1
+   c:	2b 33       	cpi	r18, 0x3B	; 59
+   e:	31 05       	cpc	r19, r1
+  10:	00 f0       	brcs	.+0      	; 0x12 <adc_getJoystickDirection+0x12>
+  12:	28 5c       	subi	r18, 0xC8	; 200
+  14:	31 09       	sbc	r19, r1
+  16:	2b 33       	cpi	r18, 0x3B	; 59
+  18:	31 05       	cpc	r19, r1
+  1a:	00 f0       	brcs	.+0      	; 0x1c <adc_getJoystickDirection+0x1c>
+  1c:	28 5c       	subi	r18, 0xC8	; 200
+  1e:	31 09       	sbc	r19, r1
+  20:	2b 33       	cpi	r18, 0x3B	; 59
+  22:	31 05       	cpc	r19, r1
+  24:	00 f0       	brcs	.+0      	; 0x26 <adc_getJoystickDirection+0x26>
+  26:	83 50       	subi	r24, 0x03	; 3
+  28:	93 40       	sbci	r25, 0x03	; 3
+  2a:	cb 97       	sbiw	r24, 0x3b	; 59
+  2c:	00 f0       	brcs	.+0      	; 0x2e <adc_getJoystickDirection+0x2e>
+  2e:	84 e0       	ldi	r24, 0x04	; 4
+  30:	08 95       	ret
+  32:	80 e0       	ldi	r24, 0x00	; 0
+  34:	08 95       	ret
+  36:	81 e0       	ldi	r24, 0x01	; 1
+  38:	08 95       	ret
+  3a:	82 e0       	ldi	r24, 0x02	; 2
+  3c:	08 95       	ret
+  3e:	83 e0       	ldi	r24, 0x03	; 3
+  40:	08 95       	ret
+
+Disassembly of section .text.adc_getTemperature:
+
+00000000 <adc_getTemperature>:
+   0:	82 e0       	ldi	r24, 0x02	; 2
+   2:	0e 94 00 00 	call	0	; 0x0 <adc_getTemperature>
+   6:	80 e0       	ldi	r24, 0x00	; 0
+   8:	90 e0       	ldi	r25, 0x00	; 0
+   a:	08 95       	ret
+
+ses_button.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .text.button_init 0000002e  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  4 .text.button_isJoystickPressed 0000000c  00000000  00000000  00000062  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  5 .text.button_isRotaryPressed 0000000e  00000000  00000000  0000006e  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  6 .text.button_checkState 000000be  00000000  00000000  0000007c  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .text.button_setRotaryButtonCallback 0000000a  00000000  00000000  0000013a  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  8 .text.button_setJoystickButtonCallback 0000000a  00000000  00000000  00000144  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  9 .text.__vector_9 0000006c  00000000  00000000  0000014e  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 10 .bss.state.2943 00000005  00000000  00000000  000001ba  2**0
+                  ALLOC
+ 11 .bss.index.2944 00000001  00000000  00000000  000001ba  2**0
+                  ALLOC
+ 12 .bss.debouncedState.2945 00000001  00000000  00000000  000001ba  2**0
+                  ALLOC
+ 13 .comment      00000031  00000000  00000000  000001ba  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text.button_init:
+
+00000000 <button_init>:
+   0:	26 98       	cbi	0x04, 6	; 4
+   2:	27 98       	cbi	0x04, 7	; 4
+   4:	2e 9a       	sbi	0x05, 6	; 5
+   6:	2f 9a       	sbi	0x05, 7	; 5
+   8:	88 23       	and	r24, r24
+   a:	01 f0       	breq	.+0      	; 0xc <button_init+0xc>
+   c:	80 e0       	ldi	r24, 0x00	; 0
+   e:	90 e0       	ldi	r25, 0x00	; 0
+  10:	0e 94 00 00 	call	0	; 0x0 <button_init>
+  14:	00 c0       	rjmp	.+0      	; 0x16 <button_init+0x16>
+  16:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <__SREG__+0x800029>
+  1a:	81 60       	ori	r24, 0x01	; 1
+  1c:	80 93 68 00 	sts	0x0068, r24	; 0x800068 <__SREG__+0x800029>
+  20:	80 91 6b 00 	lds	r24, 0x006B	; 0x80006b <__SREG__+0x80002c>
+  24:	80 6c       	ori	r24, 0xC0	; 192
+  26:	80 93 6b 00 	sts	0x006B, r24	; 0x80006b <__SREG__+0x80002c>
+  2a:	78 94       	sei
+  2c:	08 95       	ret
+
+Disassembly of section .text.button_isJoystickPressed:
+
+00000000 <button_isJoystickPressed>:
+   0:	83 b1       	in	r24, 0x03	; 3
+   2:	80 95       	com	r24
+   4:	88 1f       	adc	r24, r24
+   6:	88 27       	eor	r24, r24
+   8:	88 1f       	adc	r24, r24
+   a:	08 95       	ret
+
+Disassembly of section .text.button_isRotaryPressed:
+
+00000000 <button_isRotaryPressed>:
+   0:	83 b1       	in	r24, 0x03	; 3
+   2:	86 fb       	bst	r24, 6
+   4:	88 27       	eor	r24, r24
+   6:	80 f9       	bld	r24, 0
+   8:	91 e0       	ldi	r25, 0x01	; 1
+   a:	89 27       	eor	r24, r25
+   c:	08 95       	ret
+
+Disassembly of section .text.button_checkState:
+
+00000000 <button_checkState>:
+   0:	cf 92       	push	r12
+   2:	df 92       	push	r13
+   4:	ef 92       	push	r14
+   6:	ff 92       	push	r15
+   8:	0f 93       	push	r16
+   a:	1f 93       	push	r17
+   c:	cf 93       	push	r28
+   e:	df 93       	push	r29
+  10:	c0 90 00 00 	lds	r12, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  14:	d0 90 00 00 	lds	r13, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  18:	cd 2d       	mov	r28, r13
+  1a:	d0 e0       	ldi	r29, 0x00	; 0
+  1c:	c0 50       	subi	r28, 0x00	; 0
+  1e:	d0 40       	sbci	r29, 0x00	; 0
+  20:	18 82       	st	Y, r1
+  22:	1f 99       	sbic	0x03, 7	; 3
+  24:	00 c0       	rjmp	.+0      	; 0x26 <button_checkState+0x26>
+  26:	81 e0       	ldi	r24, 0x01	; 1
+  28:	88 83       	st	Y, r24
+  2a:	0e 94 00 00 	call	0	; 0x0 <button_checkState>
+  2e:	88 23       	and	r24, r24
+  30:	01 f0       	breq	.+0      	; 0x32 <button_checkState+0x32>
+  32:	88 81       	ld	r24, Y
+  34:	82 60       	ori	r24, 0x02	; 2
+  36:	88 83       	st	Y, r24
+  38:	81 e0       	ldi	r24, 0x01	; 1
+  3a:	8d 0d       	add	r24, r13
+  3c:	85 30       	cpi	r24, 0x05	; 5
+  3e:	01 f0       	breq	.+0      	; 0x40 <button_checkState+0x40>
+  40:	80 93 00 00 	sts	0x0000, r24	; 0x800000 <__SREG__+0x7fffc1>
+  44:	00 c0       	rjmp	.+0      	; 0x46 <button_checkState+0x46>
+  46:	10 92 00 00 	sts	0x0000, r1	; 0x800000 <__SREG__+0x7fffc1>
+  4a:	e0 e0       	ldi	r30, 0x00	; 0
+  4c:	f0 e0       	ldi	r31, 0x00	; 0
+  4e:	8f ef       	ldi	r24, 0xFF	; 255
+  50:	95 e0       	ldi	r25, 0x05	; 5
+  52:	9e 0f       	add	r25, r30
+  54:	21 91       	ld	r18, Z+
+  56:	82 23       	and	r24, r18
+  58:	9e 13       	cpse	r25, r30
+  5a:	00 c0       	rjmp	.+0      	; 0x5c <button_checkState+0x5c>
+  5c:	80 93 00 00 	sts	0x0000, r24	; 0x800000 <__SREG__+0x7fffc1>
+  60:	80 95       	com	r24
+  62:	81 70       	andi	r24, 0x01	; 1
+  64:	8c 21       	and	r24, r12
+  66:	01 f0       	breq	.+0      	; 0x68 <button_checkState+0x68>
+  68:	e0 91 00 00 	lds	r30, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  6c:	f0 91 00 00 	lds	r31, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  70:	09 95       	icall
+  72:	80 91 00 00 	lds	r24, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  76:	81 fb       	bst	r24, 1
+  78:	ee 24       	eor	r14, r14
+  7a:	e0 f8       	bld	r14, 0
+  7c:	f1 2c       	mov	r15, r1
+  7e:	e0 94       	com	r14
+  80:	f0 94       	com	r15
+  82:	c1 fa       	bst	r12, 1
+  84:	00 27       	eor	r16, r16
+  86:	00 f9       	bld	r16, 0
+  88:	10 e0       	ldi	r17, 0x00	; 0
+  8a:	0e 21       	and	r16, r14
+  8c:	1f 21       	and	r17, r15
+  8e:	01 2b       	or	r16, r17
+  90:	01 f0       	breq	.+0      	; 0x92 <button_checkState+0x92>
+  92:	e0 91 00 00 	lds	r30, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  96:	f0 91 00 00 	lds	r31, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  9a:	df 91       	pop	r29
+  9c:	cf 91       	pop	r28
+  9e:	1f 91       	pop	r17
+  a0:	0f 91       	pop	r16
+  a2:	ff 90       	pop	r15
+  a4:	ef 90       	pop	r14
+  a6:	df 90       	pop	r13
+  a8:	cf 90       	pop	r12
+  aa:	09 94       	ijmp
+  ac:	df 91       	pop	r29
+  ae:	cf 91       	pop	r28
+  b0:	1f 91       	pop	r17
+  b2:	0f 91       	pop	r16
+  b4:	ff 90       	pop	r15
+  b6:	ef 90       	pop	r14
+  b8:	df 90       	pop	r13
+  ba:	cf 90       	pop	r12
+  bc:	08 95       	ret
+
+Disassembly of section .text.button_setRotaryButtonCallback:
+
+00000000 <button_setRotaryButtonCallback>:
+   0:	90 93 00 00 	sts	0x0000, r25	; 0x800000 <__SREG__+0x7fffc1>
+   4:	80 93 00 00 	sts	0x0000, r24	; 0x800000 <__SREG__+0x7fffc1>
+   8:	08 95       	ret
+
+Disassembly of section .text.button_setJoystickButtonCallback:
+
+00000000 <button_setJoystickButtonCallback>:
+   0:	90 93 00 00 	sts	0x0000, r25	; 0x800000 <__SREG__+0x7fffc1>
+   4:	80 93 00 00 	sts	0x0000, r24	; 0x800000 <__SREG__+0x7fffc1>
+   8:	08 95       	ret
+
+Disassembly of section .text.__vector_9:
+
+00000000 <__vector_9>:
+   0:	1f 92       	push	r1
+   2:	0f 92       	push	r0
+   4:	0f b6       	in	r0, 0x3f	; 63
+   6:	0f 92       	push	r0
+   8:	11 24       	eor	r1, r1
+   a:	0b b6       	in	r0, 0x3b	; 59
+   c:	0f 92       	push	r0
+   e:	2f 93       	push	r18
+  10:	3f 93       	push	r19
+  12:	4f 93       	push	r20
+  14:	5f 93       	push	r21
+  16:	6f 93       	push	r22
+  18:	7f 93       	push	r23
+  1a:	8f 93       	push	r24
+  1c:	9f 93       	push	r25
+  1e:	af 93       	push	r26
+  20:	bf 93       	push	r27
+  22:	ef 93       	push	r30
+  24:	ff 93       	push	r31
+  26:	1f 99       	sbic	0x03, 7	; 3
+  28:	00 c0       	rjmp	.+0      	; 0x2a <__vector_9+0x2a>
+  2a:	e0 91 00 00 	lds	r30, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  2e:	f0 91 00 00 	lds	r31, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  32:	09 95       	icall
+  34:	0e 94 00 00 	call	0	; 0x0 <__vector_9>
+  38:	88 23       	and	r24, r24
+  3a:	01 f0       	breq	.+0      	; 0x3c <__vector_9+0x3c>
+  3c:	e0 91 00 00 	lds	r30, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  40:	f0 91 00 00 	lds	r31, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  44:	09 95       	icall
+  46:	ff 91       	pop	r31
+  48:	ef 91       	pop	r30
+  4a:	bf 91       	pop	r27
+  4c:	af 91       	pop	r26
+  4e:	9f 91       	pop	r25
+  50:	8f 91       	pop	r24
+  52:	7f 91       	pop	r23
+  54:	6f 91       	pop	r22
+  56:	5f 91       	pop	r21
+  58:	4f 91       	pop	r20
+  5a:	3f 91       	pop	r19
+  5c:	2f 91       	pop	r18
+  5e:	0f 90       	pop	r0
+  60:	0b be       	out	0x3b, r0	; 59
+  62:	0f 90       	pop	r0
+  64:	0f be       	out	0x3f, r0	; 63
+  66:	0f 90       	pop	r0
+  68:	1f 90       	pop	r1
+  6a:	18 95       	reti
+
+ses_led.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .text.led_redInit 00000006  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  4 .text.led_redToggle 0000000a  00000000  00000000  0000003a  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  5 .text.led_redOn 00000004  00000000  00000000  00000044  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  6 .text.led_redOff 00000004  00000000  00000000  00000048  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  7 .text.led_yellowInit 00000006  00000000  00000000  0000004c  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  8 .text.led_yellowToggle 00000008  00000000  00000000  00000052  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  9 .text.led_yellowOn 00000004  00000000  00000000  0000005a  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 10 .text.led_yellowOff 00000004  00000000  00000000  0000005e  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 11 .text.led_greenInit 00000006  00000000  00000000  00000062  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 12 .text.led_greenToggle 0000000a  00000000  00000000  00000068  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 13 .text.led_greenOn 00000004  00000000  00000000  00000072  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 14 .text.led_greenOff 00000004  00000000  00000000  00000076  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 15 .comment      00000031  00000000  00000000  0000007a  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text.led_redInit:
+
+00000000 <led_redInit>:
+   0:	99 9a       	sbi	0x13, 1	; 19
+   2:	a1 9a       	sbi	0x14, 1	; 20
+   4:	08 95       	ret
+
+Disassembly of section .text.led_redToggle:
+
+00000000 <led_redToggle>:
+   0:	94 b3       	in	r25, 0x14	; 20
+   2:	82 e0       	ldi	r24, 0x02	; 2
+   4:	89 27       	eor	r24, r25
+   6:	84 bb       	out	0x14, r24	; 20
+   8:	08 95       	ret
+
+Disassembly of section .text.led_redOn:
+
+00000000 <led_redOn>:
+   0:	a1 98       	cbi	0x14, 1	; 20
+   2:	08 95       	ret
+
+Disassembly of section .text.led_redOff:
+
+00000000 <led_redOff>:
+   0:	a1 9a       	sbi	0x14, 1	; 20
+   2:	08 95       	ret
+
+Disassembly of section .text.led_yellowInit:
+
+00000000 <led_yellowInit>:
+   0:	87 9a       	sbi	0x10, 7	; 16
+   2:	8f 9a       	sbi	0x11, 7	; 17
+   4:	08 95       	ret
+
+Disassembly of section .text.led_yellowToggle:
+
+00000000 <led_yellowToggle>:
+   0:	81 b3       	in	r24, 0x11	; 17
+   2:	80 58       	subi	r24, 0x80	; 128
+   4:	81 bb       	out	0x11, r24	; 17
+   6:	08 95       	ret
+
+Disassembly of section .text.led_yellowOn:
+
+00000000 <led_yellowOn>:
+   0:	8f 98       	cbi	0x11, 7	; 17
+   2:	08 95       	ret
+
+Disassembly of section .text.led_yellowOff:
+
+00000000 <led_yellowOff>:
+   0:	8f 9a       	sbi	0x11, 7	; 17
+   2:	08 95       	ret
+
+Disassembly of section .text.led_greenInit:
+
+00000000 <led_greenInit>:
+   0:	86 9a       	sbi	0x10, 6	; 16
+   2:	8e 9a       	sbi	0x11, 6	; 17
+   4:	08 95       	ret
+
+Disassembly of section .text.led_greenToggle:
+
+00000000 <led_greenToggle>:
+   0:	91 b3       	in	r25, 0x11	; 17
+   2:	80 e4       	ldi	r24, 0x40	; 64
+   4:	89 27       	eor	r24, r25
+   6:	81 bb       	out	0x11, r24	; 17
+   8:	08 95       	ret
+
+Disassembly of section .text.led_greenOn:
+
+00000000 <led_greenOn>:
+   0:	8e 98       	cbi	0x11, 6	; 17
+   2:	08 95       	ret
+
+Disassembly of section .text.led_greenOff:
+
+00000000 <led_greenOff>:
+   0:	8e 9a       	sbi	0x11, 6	; 17
+   2:	08 95       	ret
+
+ses_scheduler.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .text.scheduler_update 00000022  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  4 .text.scheduler_init 0000000c  00000000  00000000  00000056  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  5 .text.scheduler_add 00000042  00000000  00000000  00000062  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  6 .text.scheduler_remove 0000003e  00000000  00000000  000000a4  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .text.scheduler_run 00000048  00000000  00000000  000000e2  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  8 .bss.taskList 00000002  00000000  00000000  0000012a  2**0
+                  ALLOC
+  9 .comment      00000031  00000000  00000000  0000012a  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text.scheduler_update:
+
+00000000 <scheduler_update>:
+   0:	e0 91 00 00 	lds	r30, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+   4:	f0 91 00 00 	lds	r31, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+   8:	21 85       	ldd	r18, Z+9	; 0x09
+   a:	32 85       	ldd	r19, Z+10	; 0x0a
+   c:	21 15       	cp	r18, r1
+   e:	31 05       	cpc	r19, r1
+  10:	01 f0       	breq	.+0      	; 0x12 <scheduler_update+0x12>
+  12:	84 81       	ldd	r24, Z+4	; 0x04
+  14:	95 81       	ldd	r25, Z+5	; 0x05
+  16:	01 97       	sbiw	r24, 0x01	; 1
+  18:	95 83       	std	Z+5, r25	; 0x05
+  1a:	84 83       	std	Z+4, r24	; 0x04
+  1c:	f9 01       	movw	r30, r18
+  1e:	00 c0       	rjmp	.+0      	; 0x20 <scheduler_update+0x20>
+  20:	08 95       	ret
+
+Disassembly of section .text.scheduler_init:
+
+00000000 <scheduler_init>:
+   0:	80 e0       	ldi	r24, 0x00	; 0
+   2:	90 e0       	ldi	r25, 0x00	; 0
+   4:	0e 94 00 00 	call	0	; 0x0 <scheduler_init>
+   8:	0c 94 00 00 	jmp	0	; 0x0 <scheduler_init>
+
+Disassembly of section .text.scheduler_add:
+
+00000000 <scheduler_add>:
+   0:	00 97       	sbiw	r24, 0x00	; 0
+   2:	01 f0       	breq	.+0      	; 0x4 <scheduler_add+0x4>
+   4:	e0 91 00 00 	lds	r30, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+   8:	f0 91 00 00 	lds	r31, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+   c:	30 97       	sbiw	r30, 0x00	; 0
+   e:	01 f4       	brne	.+0      	; 0x10 <scheduler_add+0x10>
+  10:	90 93 00 00 	sts	0x0000, r25	; 0x800000 <__SREG__+0x7fffc1>
+  14:	80 93 00 00 	sts	0x0000, r24	; 0x800000 <__SREG__+0x7fffc1>
+  18:	00 c0       	rjmp	.+0      	; 0x1a <scheduler_add+0x1a>
+  1a:	40 81       	ld	r20, Z
+  1c:	51 81       	ldd	r21, Z+1	; 0x01
+  1e:	f9 01       	movw	r30, r18
+  20:	dc 01       	movw	r26, r24
+  22:	2d 91       	ld	r18, X+
+  24:	3c 91       	ld	r19, X
+  26:	42 17       	cp	r20, r18
+  28:	53 07       	cpc	r21, r19
+  2a:	01 f0       	breq	.+0      	; 0x2c <scheduler_add+0x2c>
+  2c:	21 85       	ldd	r18, Z+9	; 0x09
+  2e:	32 85       	ldd	r19, Z+10	; 0x0a
+  30:	21 15       	cp	r18, r1
+  32:	31 05       	cpc	r19, r1
+  34:	01 f4       	brne	.+0      	; 0x36 <scheduler_add+0x36>
+  36:	92 87       	std	Z+10, r25	; 0x0a
+  38:	81 87       	std	Z+9, r24	; 0x09
+  3a:	81 e0       	ldi	r24, 0x01	; 1
+  3c:	08 95       	ret
+  3e:	80 e0       	ldi	r24, 0x00	; 0
+  40:	08 95       	ret
+
+Disassembly of section .text.scheduler_remove:
+
+00000000 <scheduler_remove>:
+   0:	cf 93       	push	r28
+   2:	df 93       	push	r29
+   4:	a0 91 00 00 	lds	r26, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+   8:	b0 91 00 00 	lds	r27, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+   c:	fd 01       	movw	r30, r26
+   e:	21 85       	ldd	r18, Z+9	; 0x09
+  10:	32 85       	ldd	r19, Z+10	; 0x0a
+  12:	21 15       	cp	r18, r1
+  14:	31 05       	cpc	r19, r1
+  16:	01 f0       	breq	.+0      	; 0x18 <scheduler_remove+0x18>
+  18:	60 81       	ld	r22, Z
+  1a:	71 81       	ldd	r23, Z+1	; 0x01
+  1c:	ec 01       	movw	r28, r24
+  1e:	48 81       	ld	r20, Y
+  20:	59 81       	ldd	r21, Y+1	; 0x01
+  22:	64 17       	cp	r22, r20
+  24:	75 07       	cpc	r23, r21
+  26:	01 f4       	brne	.+0      	; 0x28 <scheduler_remove+0x28>
+  28:	1a 96       	adiw	r26, 0x0a	; 10
+  2a:	3c 93       	st	X, r19
+  2c:	2e 93       	st	-X, r18
+  2e:	19 97       	sbiw	r26, 0x09	; 9
+  30:	01 84       	ldd	r0, Z+9	; 0x09
+  32:	f2 85       	ldd	r31, Z+10	; 0x0a
+  34:	e0 2d       	mov	r30, r0
+  36:	00 c0       	rjmp	.+0      	; 0x38 <scheduler_remove+0x38>
+  38:	df 91       	pop	r29
+  3a:	cf 91       	pop	r28
+  3c:	08 95       	ret
+
+Disassembly of section .text.scheduler_run:
+
+00000000 <scheduler_run>:
+   0:	cf 93       	push	r28
+   2:	df 93       	push	r29
+   4:	c0 91 00 00 	lds	r28, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+   8:	d0 91 00 00 	lds	r29, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+   c:	89 85       	ldd	r24, Y+9	; 0x09
+   e:	9a 85       	ldd	r25, Y+10	; 0x0a
+  10:	89 2b       	or	r24, r25
+  12:	01 f0       	breq	.+0      	; 0x14 <scheduler_run+0x14>
+  14:	8c 81       	ldd	r24, Y+4	; 0x04
+  16:	9d 81       	ldd	r25, Y+5	; 0x05
+  18:	89 2b       	or	r24, r25
+  1a:	01 f4       	brne	.+0      	; 0x1c <scheduler_run+0x1c>
+  1c:	e8 81       	ld	r30, Y
+  1e:	f9 81       	ldd	r31, Y+1	; 0x01
+  20:	8a 81       	ldd	r24, Y+2	; 0x02
+  22:	9b 81       	ldd	r25, Y+3	; 0x03
+  24:	09 95       	icall
+  26:	8e 81       	ldd	r24, Y+6	; 0x06
+  28:	9f 81       	ldd	r25, Y+7	; 0x07
+  2a:	00 97       	sbiw	r24, 0x00	; 0
+  2c:	01 f0       	breq	.+0      	; 0x2e <scheduler_run+0x2e>
+  2e:	9d 83       	std	Y+5, r25	; 0x05
+  30:	8c 83       	std	Y+4, r24	; 0x04
+  32:	00 c0       	rjmp	.+0      	; 0x34 <scheduler_run+0x34>
+  34:	ce 01       	movw	r24, r28
+  36:	0e 94 00 00 	call	0	; 0x0 <scheduler_run>
+  3a:	09 84       	ldd	r0, Y+9	; 0x09
+  3c:	da 85       	ldd	r29, Y+10	; 0x0a
+  3e:	c0 2d       	mov	r28, r0
+  40:	00 c0       	rjmp	.+0      	; 0x42 <scheduler_run+0x42>
+  42:	df 91       	pop	r29
+  44:	cf 91       	pop	r28
+  46:	08 95       	ret
+
+ses_timer.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .text.timer2_setCallback 0000000a  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  4 .text.timer2_start 00000038  00000000  00000000  0000003e  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  5 .text.timer2_stop 00000016  00000000  00000000  00000076  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  6 .text.timer1_setCallback 0000000a  00000000  00000000  0000008c  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .text.timer1_start 0000003c  00000000  00000000  00000096  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  8 .text.timer1_stop 00000016  00000000  00000000  000000d2  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  9 .text.__vector_17 00000056  00000000  00000000  000000e8  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 10 .text.__vector_13 00000056  00000000  00000000  0000013e  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 11 .comment      00000031  00000000  00000000  00000194  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text.timer2_setCallback:
+
+00000000 <timer2_setCallback>:
+   0:	90 93 00 00 	sts	0x0000, r25	; 0x800000 <__SREG__+0x7fffc1>
+   4:	80 93 00 00 	sts	0x0000, r24	; 0x800000 <__SREG__+0x7fffc1>
+   8:	08 95       	ret
+
+Disassembly of section .text.timer2_start:
+
+00000000 <timer2_start>:
+   0:	e4 e6       	ldi	r30, 0x64	; 100
+   2:	f0 e0       	ldi	r31, 0x00	; 0
+   4:	80 81       	ld	r24, Z
+   6:	8f 7b       	andi	r24, 0xBF	; 191
+   8:	80 83       	st	Z, r24
+   a:	e0 eb       	ldi	r30, 0xB0	; 176
+   c:	f0 e0       	ldi	r31, 0x00	; 0
+   e:	80 81       	ld	r24, Z
+  10:	82 60       	ori	r24, 0x02	; 2
+  12:	80 83       	st	Z, r24
+  14:	e1 eb       	ldi	r30, 0xB1	; 177
+  16:	f0 e0       	ldi	r31, 0x00	; 0
+  18:	80 81       	ld	r24, Z
+  1a:	87 7f       	andi	r24, 0xF7	; 247
+  1c:	80 83       	st	Z, r24
+  1e:	80 81       	ld	r24, Z
+  20:	84 60       	ori	r24, 0x04	; 4
+  22:	80 83       	st	Z, r24
+  24:	b9 9a       	sbi	0x17, 1	; 23
+  26:	8a ef       	ldi	r24, 0xFA	; 250
+  28:	80 93 b3 00 	sts	0x00B3, r24	; 0x8000b3 <__SREG__+0x800074>
+  2c:	e0 e7       	ldi	r30, 0x70	; 112
+  2e:	f0 e0       	ldi	r31, 0x00	; 0
+  30:	80 81       	ld	r24, Z
+  32:	82 60       	ori	r24, 0x02	; 2
+  34:	80 83       	st	Z, r24
+  36:	08 95       	ret
+
+Disassembly of section .text.timer2_stop:
+
+00000000 <timer2_stop>:
+   0:	e4 e6       	ldi	r30, 0x64	; 100
+   2:	f0 e0       	ldi	r31, 0x00	; 0
+   4:	80 81       	ld	r24, Z
+   6:	80 64       	ori	r24, 0x40	; 64
+   8:	80 83       	st	Z, r24
+   a:	e0 e7       	ldi	r30, 0x70	; 112
+   c:	f0 e0       	ldi	r31, 0x00	; 0
+   e:	80 81       	ld	r24, Z
+  10:	8d 7f       	andi	r24, 0xFD	; 253
+  12:	80 83       	st	Z, r24
+  14:	08 95       	ret
+
+Disassembly of section .text.timer1_setCallback:
+
+00000000 <timer1_setCallback>:
+   0:	90 93 00 00 	sts	0x0000, r25	; 0x800000 <__SREG__+0x7fffc1>
+   4:	80 93 00 00 	sts	0x0000, r24	; 0x800000 <__SREG__+0x7fffc1>
+   8:	08 95       	ret
+
+Disassembly of section .text.timer1_start:
+
+00000000 <timer1_start>:
+   0:	e4 e6       	ldi	r30, 0x64	; 100
+   2:	f0 e0       	ldi	r31, 0x00	; 0
+   4:	80 81       	ld	r24, Z
+   6:	87 7f       	andi	r24, 0xF7	; 247
+   8:	80 83       	st	Z, r24
+   a:	e0 e8       	ldi	r30, 0x80	; 128
+   c:	f0 e0       	ldi	r31, 0x00	; 0
+   e:	80 81       	ld	r24, Z
+  10:	80 83       	st	Z, r24
+  12:	e1 e8       	ldi	r30, 0x81	; 129
+  14:	f0 e0       	ldi	r31, 0x00	; 0
+  16:	80 81       	ld	r24, Z
+  18:	88 60       	ori	r24, 0x08	; 8
+  1a:	80 83       	st	Z, r24
+  1c:	80 81       	ld	r24, Z
+  1e:	83 60       	ori	r24, 0x03	; 3
+  20:	80 83       	st	Z, r24
+  22:	b1 9a       	sbi	0x16, 1	; 22
+  24:	82 ee       	ldi	r24, 0xE2	; 226
+  26:	94 e0       	ldi	r25, 0x04	; 4
+  28:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__SREG__+0x80004a>
+  2c:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__SREG__+0x800049>
+  30:	ef e6       	ldi	r30, 0x6F	; 111
+  32:	f0 e0       	ldi	r31, 0x00	; 0
+  34:	80 81       	ld	r24, Z
+  36:	82 60       	ori	r24, 0x02	; 2
+  38:	80 83       	st	Z, r24
+  3a:	08 95       	ret
+
+Disassembly of section .text.timer1_stop:
+
+00000000 <timer1_stop>:
+   0:	e4 e6       	ldi	r30, 0x64	; 100
+   2:	f0 e0       	ldi	r31, 0x00	; 0
+   4:	80 81       	ld	r24, Z
+   6:	88 60       	ori	r24, 0x08	; 8
+   8:	80 83       	st	Z, r24
+   a:	ef e6       	ldi	r30, 0x6F	; 111
+   c:	f0 e0       	ldi	r31, 0x00	; 0
+   e:	80 81       	ld	r24, Z
+  10:	8d 7f       	andi	r24, 0xFD	; 253
+  12:	80 83       	st	Z, r24
+  14:	08 95       	ret
+
+Disassembly of section .text.__vector_17:
+
+00000000 <__vector_17>:
+   0:	1f 92       	push	r1
+   2:	0f 92       	push	r0
+   4:	0f b6       	in	r0, 0x3f	; 63
+   6:	0f 92       	push	r0
+   8:	11 24       	eor	r1, r1
+   a:	0b b6       	in	r0, 0x3b	; 59
+   c:	0f 92       	push	r0
+   e:	2f 93       	push	r18
+  10:	3f 93       	push	r19
+  12:	4f 93       	push	r20
+  14:	5f 93       	push	r21
+  16:	6f 93       	push	r22
+  18:	7f 93       	push	r23
+  1a:	8f 93       	push	r24
+  1c:	9f 93       	push	r25
+  1e:	af 93       	push	r26
+  20:	bf 93       	push	r27
+  22:	ef 93       	push	r30
+  24:	ff 93       	push	r31
+  26:	e0 91 00 00 	lds	r30, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  2a:	f0 91 00 00 	lds	r31, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  2e:	09 95       	icall
+  30:	ff 91       	pop	r31
+  32:	ef 91       	pop	r30
+  34:	bf 91       	pop	r27
+  36:	af 91       	pop	r26
+  38:	9f 91       	pop	r25
+  3a:	8f 91       	pop	r24
+  3c:	7f 91       	pop	r23
+  3e:	6f 91       	pop	r22
+  40:	5f 91       	pop	r21
+  42:	4f 91       	pop	r20
+  44:	3f 91       	pop	r19
+  46:	2f 91       	pop	r18
+  48:	0f 90       	pop	r0
+  4a:	0b be       	out	0x3b, r0	; 59
+  4c:	0f 90       	pop	r0
+  4e:	0f be       	out	0x3f, r0	; 63
+  50:	0f 90       	pop	r0
+  52:	1f 90       	pop	r1
+  54:	18 95       	reti
+
+Disassembly of section .text.__vector_13:
+
+00000000 <__vector_13>:
+   0:	1f 92       	push	r1
+   2:	0f 92       	push	r0
+   4:	0f b6       	in	r0, 0x3f	; 63
+   6:	0f 92       	push	r0
+   8:	11 24       	eor	r1, r1
+   a:	0b b6       	in	r0, 0x3b	; 59
+   c:	0f 92       	push	r0
+   e:	2f 93       	push	r18
+  10:	3f 93       	push	r19
+  12:	4f 93       	push	r20
+  14:	5f 93       	push	r21
+  16:	6f 93       	push	r22
+  18:	7f 93       	push	r23
+  1a:	8f 93       	push	r24
+  1c:	9f 93       	push	r25
+  1e:	af 93       	push	r26
+  20:	bf 93       	push	r27
+  22:	ef 93       	push	r30
+  24:	ff 93       	push	r31
+  26:	e0 91 00 00 	lds	r30, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  2a:	f0 91 00 00 	lds	r31, 0x0000	; 0x800000 <__SREG__+0x7fffc1>
+  2e:	09 95       	icall
+  30:	ff 91       	pop	r31
+  32:	ef 91       	pop	r30
+  34:	bf 91       	pop	r27
+  36:	af 91       	pop	r26
+  38:	9f 91       	pop	r25
+  3a:	8f 91       	pop	r24
+  3c:	7f 91       	pop	r23
+  3e:	6f 91       	pop	r22
+  40:	5f 91       	pop	r21
+  42:	4f 91       	pop	r20
+  44:	3f 91       	pop	r19
+  46:	2f 91       	pop	r18
+  48:	0f 90       	pop	r0
+  4a:	0b be       	out	0x3b, r0	; 59
+  4c:	0f 90       	pop	r0
+  4e:	0f be       	out	0x3f, r0	; 63
+  50:	0f 90       	pop	r0
+  52:	1f 90       	pop	r1
+  54:	18 95       	reti
